@@ -40,7 +40,7 @@ public class CmdUnclaim extends FCommand
 		
 		if (otherFaction.isSafeZone())
 		{
-			if (Permission.MANAGE_SAFE_ZONE.has(sender))
+			if (Permission.MANAGE_SAFE_ZONE.has(sender) && Permission.BYPASS.has(sender))
 			{
 				Board.removeAt(flocation);
 				SpoutFeatures.updateTerritoryDisplayLoc(flocation);

@@ -23,7 +23,7 @@ public class CmdSafeunclaimall extends FCommand
 		senderMustBePlayer = false;
 		senderMustBeMember = false;
 		senderMustBeModerator = false;
-		senderMustBeAdmin = false;
+		senderMustBeAdmin = true;
 		
 		this.setHelpShort("Unclaim all safezone land");
 	}
@@ -31,11 +31,17 @@ public class CmdSafeunclaimall extends FCommand
 	@Override
 	public void perform()
 	{
-		Board.unclaimAll(Factions.i.getSafeZone().getId());
-		msg("<i>You unclaimed ALL safe zone land.");
-
-		if (Conf.logLandUnclaims)
-			P.p.log(fme.getName()+" unclaimed all safe zones.");
+		// Make sure they have bypass!
+		if(Permission.BYPASS.has(sender))
+		{
+			Board.unclaimAll(Factions.i.getSafeZone().getId());
+			msg("<i>You unclaimed ALL safe zone land.");
+	
+			if (Conf.logLandUnclaims)
+				P.p.log(fme.getName()+" unclaimed all safe zones.");
+		}
+		else
+		msg("<i>You need admin bypass on to unclaim all safezone!");
 	}
 	
 }

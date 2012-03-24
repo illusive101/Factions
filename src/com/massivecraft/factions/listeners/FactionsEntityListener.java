@@ -317,6 +317,7 @@ public class FactionsEntityListener implements Listener
 					FPlayer attacker = FPlayers.i.get((Player)damager);
 					attacker.msg("<i>You can't hurt other players in "+(defLocFaction.isSafeZone() ? "a SafeZone." : "peaceful territory."));
 				}
+				sub.setCancelled(true);
 				return false;
 			}
 			return !defLocFaction.noMonstersInTerritory();
@@ -335,6 +336,7 @@ public class FactionsEntityListener implements Listener
 		if (attacker.hasLoginPvpDisabled())
 		{
 			if (notify) attacker.msg("<i>You can't hurt other players for " + Conf.noPVPDamageToOthersForXSecondsAfterLogin + " seconds after logging in.");
+			sub.setCancelled(true);
 			return false;
 		}
 		
@@ -344,6 +346,7 @@ public class FactionsEntityListener implements Listener
 		if (locFaction.noPvPInTerritory())
 		{
 			if (notify) attacker.msg("<i>You can't hurt other players while you are in "+(locFaction.isSafeZone() ? "a SafeZone." : "peaceful territory."));
+			sub.setCancelled(true);
 			return false;
 		}
 
@@ -359,6 +362,7 @@ public class FactionsEntityListener implements Listener
 		if (attackFaction.isNone() && Conf.disablePVPForFactionlessPlayers)
 		{
 			if (notify) attacker.msg("<i>You can't hurt other players until you join a faction.");
+			sub.setCancelled(true);
 			return false;
 		}
 		else if (defendFaction.isNone())
@@ -371,6 +375,7 @@ public class FactionsEntityListener implements Listener
 			else if (Conf.disablePVPForFactionlessPlayers)
 			{
 				if (notify) attacker.msg("<i>You can't hurt players who are not currently in a faction.");
+				sub.setCancelled(true);
 				return false;
 			}
 		}
@@ -378,11 +383,13 @@ public class FactionsEntityListener implements Listener
 		if (defendFaction.isPeaceful())
 		{
 			if (notify) attacker.msg("<i>You can't hurt players who are in a peaceful faction.");
+			sub.setCancelled(true);
 			return false;
 		}
 		else if (attackFaction.isPeaceful())
 		{
 			if (notify) attacker.msg("<i>You can't hurt players while you are in a peaceful faction.");
+			sub.setCancelled(true);
 			return false;
 		}
 		
@@ -392,6 +399,7 @@ public class FactionsEntityListener implements Listener
 		if (Conf.disablePVPBetweenNeutralFactions && relation.isNeutral())
 		{
 			if (notify) attacker.msg("<i>You can't hurt neutral factions. Declare them as an enemy.");
+			sub.setCancelled(true);
 			return false;
 		}
 		
@@ -403,6 +411,7 @@ public class FactionsEntityListener implements Listener
 		if (relation.isMember() || relation.isAlly())
 		{
 			if (notify) attacker.msg("<i>You can't hurt %s<i>.", defender.describeTo(attacker));
+			sub.setCancelled(true);
 			return false;
 		}
 		
@@ -416,6 +425,7 @@ public class FactionsEntityListener implements Listener
 				attacker.msg("<i>You can't hurt %s<i> in their own territory unless you declare them as an enemy.", defender.describeTo(attacker));
 				defender.msg("%s<i> tried to hurt you.", attacker.describeTo(defender, true));
 			}
+			sub.setCancelled(true);
 			return false;
 		}
 		

@@ -211,10 +211,25 @@ public class FactionsPlayerListener implements Listener
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
-		if (event.isCancelled()) return;
-
 		Block block = event.getClickedBlock();
 		Player player = event.getPlayer();
+		FLocation mine = new FLocation(player.getLocation());
+		Faction pLoc = Board.getFactionAt(mine);
+		
+		if (pLoc.isPeaceful() || pLoc.isSafeZone() || pLoc.isWarZone())
+		{
+	        if (event.getItem() != null 
+	        		&& event.getItem().getType() == Material.ENDER_PEARL) 
+	        {
+	            event.getPlayer().sendMessage("Ender Pearl teleportation disabled in safe/war/peaceful zones!");
+	            event.setCancelled(true);
+	        }
+		}
+
+		
+		if (event.isCancelled()) return;
+
+
 
 		if (block == null)
 		{

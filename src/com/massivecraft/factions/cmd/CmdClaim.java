@@ -1,8 +1,17 @@
 package com.massivecraft.factions.cmd;
 
+import java.awt.List;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+
 import com.massivecraft.factions.Conf;
-import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.FLocation;
+import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.struct.Permission;
 import com.massivecraft.factions.util.SpiralTask;
 
@@ -27,7 +36,7 @@ public class CmdClaim extends FCommand
 		senderMustBeModerator = false;
 		senderMustBeAdmin = false;
 	}
-	
+		
 	@Override
 	public void perform()
 	{
