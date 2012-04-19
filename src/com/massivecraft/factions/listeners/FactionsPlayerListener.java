@@ -170,7 +170,7 @@ public class FactionsPlayerListener implements Listener
 		
 		if (me.getAutoClaimFor() != null)
 		{
-			me.attemptClaim(me.getAutoClaimFor(), player.getLocation(), true);
+			me.attemptClaim(me.getPlayer(), me.getAutoClaimFor(), player.getLocation(), true);
 		}
 		else if (me.isAutoSafeClaimEnabled())
 		{

@@ -1,5 +1,14 @@
 package com.massivecraft.factions.cmd;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Chunk;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+
+import com.massivecraft.factions.FPlayer;
+import com.massivecraft.factions.FPlayers;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.struct.Permission;
 import com.massivecraft.factions.struct.Role;
@@ -27,6 +36,8 @@ public class CmdAutoClaim extends FCommand
 	public void perform()
 	{
 		Faction forFaction = this.argAsFaction(0, myFaction);
+		
+		
 		if (forFaction == null || forFaction == fme.getAutoClaimFor())
 		{
 			fme.setAutoClaimFor(null);
@@ -47,7 +58,8 @@ public class CmdAutoClaim extends FCommand
 		fme.setAutoClaimFor(forFaction);
 		
 		msg("<i>Now auto-claiming land for <h>%s<i>.", forFaction.describeTo(fme));
-		fme.attemptClaim(forFaction, me.getLocation(), true);
+		fme.attemptClaim(me.getPlayer(), forFaction, me.getLocation(), true);
+
 	}
 	
 }
