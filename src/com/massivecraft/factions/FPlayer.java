@@ -532,10 +532,10 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator {
 	}
 	
 	public double getPowerLossOnDeath() {
-		  Faction faction = getFaction();
+		  Faction faction = this.getFaction();
 		  if (faction != null) {
 		   double n = faction.getFPlayers().size();
-		   return Math.log(n*n) * Math.max(1, n/35) + 3;
+		   return -(Math.log(n*n) * Math.max(1, n/35) + 3);
 		  } else {
 		   return -Conf.powerPerDeath;
 		  }
